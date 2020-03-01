@@ -5,8 +5,10 @@
     <string name="FnameError">Please Enter First Name</string>
     <string name="LnameError">Please Enter Last Name</string>
     <string name="Email">Please Enter Email</string>
-    <string name="Password">Please Enter Password</string>
+    <string name="Password">Password should contain atleast 6 digits with uppercase,lowercase,digit and a special character</string>
     <string name="ConfrimPwd">Password Doesn\'t Match</string>
+    <!-- user shared pref name-->
+    <string name="SP_NAME">user_data</string>
 
 
     <!--    <string name="login">-->

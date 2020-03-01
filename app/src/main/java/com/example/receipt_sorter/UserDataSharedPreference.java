@@ -6,13 +6,21 @@ import android.content.SharedPreferences.Editor;
 public class UserDataSharedPreference {
     SharedPreferences s;
     private User u;
-    private static final String SP_NAME="user_data";
 
-    public UserDataSharedPreference(Context context) {
-        this.s=context.getSharedPreferences(SP_NAME,0);
+
+    public UserDataSharedPreference(Context context,String SP_NAME) {
+
+            this.s = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+
+
     }
+
+
+
     public boolean writeData(User u)
     {
+
+
         Editor e=s.edit();
         e.putString("fname",u.getFname());
         e.putString("lname",u.getLname());

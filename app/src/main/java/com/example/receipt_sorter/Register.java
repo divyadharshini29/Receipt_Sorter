@@ -19,7 +19,6 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 
 import java.util.*;
 import java.text.SimpleDateFormat;
-
 public class Register extends AppCompatActivity {
     private EditText fname;
     private EditText lname;
@@ -32,15 +31,18 @@ public class Register extends AppCompatActivity {
     private  Date d;//convert edit text to date format to save in user;
     private UserDataSharedPreference userDataSharedPreference;
 
+
+
     AwesomeValidation awesomeValidation;
     private DatePickerDialog mDatePickerDialog;
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String SP_NAME="user_data";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        userDataSharedPreference=new UserDataSharedPreference(this);
+        userDataSharedPreference=new UserDataSharedPreference(this,SP_NAME);
 
         setDateTimeField();
         date =findViewById(R.id.DateText);
@@ -87,22 +89,23 @@ public class Register extends AppCompatActivity {
         confirm=findViewById(R.id.confText);
         email = findViewById(R.id.EmailText);
         register=findViewById(R.id.RegisterBtn);
+        date = findViewById(R.id.DateText);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//format
+//
+//        try {
+//            d= format.parse(date.getText().toString());
+//       } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
-        try {
-           d = format.parse(date.getText().toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{6,}";
           //Add Validation using Awesome validation
         awesomeValidation.addValidation(Register.this,R.id.FTxt,"[a-zA-Z\\s]+",R.string.FnameError);
         awesomeValidation.addValidation(Register.this,R.id.LText,"[a-zA-Z\\s]+",R.string.LnameError);
         awesomeValidation.addValidation(Register.this,R.id.EmailText,android.util.Patterns.EMAIL_ADDRESS,R.string.Email);
-        awesomeValidation.addValidation(Register.this,R.id.pwdText,regexPassword,R.string.Password);
-        awesomeValidation.addValidation(Register.this,R.id.confText,R.id.pwdText,R.string.ConfrimPwd);
+         awesomeValidation.addValidation(Register.this,R.id.pwdText,regexPassword,R.string.Password);
+         awesomeValidation.addValidation(Register.this,R.id.confText,R.id.pwdText,R.string.ConfrimPwd);
         register.setOnClickListener(new View.OnClickListener() {
 
 
@@ -110,7 +113,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 if(awesomeValidation.validate())
                 {
-                    User user=new User(fname.getText().toString(),lname.getText().toString(),d,email.getText().toString(),password.getText().toString());
+                    User user=new User(fname.getText().toString(),lname.getText().toString(),date.getText().toString(),email.getText().toString(),password.getText().toString());
                     boolean create=userDataSharedPreference.writeData(user);
                     if(create) {
                         Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();

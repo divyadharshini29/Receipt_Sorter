@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private static final String EMAIL = "email";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

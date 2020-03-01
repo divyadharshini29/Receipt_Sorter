@@ -5,11 +5,11 @@ import java.util.*;
 public class User {
     private String fname;
     private String lname;
-    private Date dob;
+    private String dob;
     private String email;
     private String password;
 
-    public User(String fname, String lname, Date dob, String email, String password) {
+    public User(String fname, String lname, String dob, String email, String password) {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
@@ -36,11 +36,11 @@ public class User {
         this.lname = lname;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
